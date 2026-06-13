@@ -63,8 +63,6 @@ impl Default for TelemetryParser {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     // TODO: Add test with real MAVLink byte samples.
     // TODO: Add test for partial message buffering.
     // TODO: Add test for CRC validation failure.

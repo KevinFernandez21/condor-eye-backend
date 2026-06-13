@@ -43,6 +43,7 @@ pub enum FrameEncoding {
 /// TODO: Implement lock-free ring buffer with overwrite-eldest semantics.
 /// TODO: Support both byte-size and frame-count capacity limits.
 /// TODO: Provide iterator for replay (e.g., re-run inference on recent frames).
+#[allow(dead_code)]
 pub struct FrameBuffer {
     // TODO: Use VecDeque or lock-free ring buffer.
     max_duration: Duration,
@@ -78,6 +79,7 @@ impl FrameBuffer {
 /// TODO: Implement RTSP client with GStreamer or ffmpeg bindings.
 /// TODO: Add reconnection logic on stream drop.
 /// TODO: Support configurable resolution and frame rate.
+#[allow(dead_code)]
 pub struct FrameCapture {
     stream_url: String,
 }
@@ -98,8 +100,6 @@ impl FrameCapture {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     // TODO: Add test for circular buffer eviction.
     // TODO: Add test for frame ordering by sequence number.
     // TODO: Add integration test with sample video file.

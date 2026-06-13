@@ -77,8 +77,6 @@ impl Default for Gateway {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     // TODO: Add Axum integration test with test HTTP client.
     // TODO: Add WebSocket connection lifecycle test.
     // TODO: Add telemetry relay throughput benchmark.

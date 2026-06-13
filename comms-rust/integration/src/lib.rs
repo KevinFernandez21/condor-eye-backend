@@ -62,8 +62,6 @@ pub fn create_protocol(_protocol_name: &str) -> Box<dyn CommunicationProtocol> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     // TODO: Add mock protocol adapter for unit testing.
     // TODO: Add serialization roundtrip tests for each protocol.
     // TODO: Add failure injection tests (timeout, disconnect, malformed data).

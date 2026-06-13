@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.pt
+*.onnx
+*.engine
+
+# Rust
+target/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker
+docker/volumes/
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Datasets (large files — use DVC)
+ai-python/datasets/data/

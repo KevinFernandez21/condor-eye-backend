@@ -1,0 +1,71 @@
+version: "3.9"
+
+# Condor Eye — Fase 0 MVP
+# Docker Compose for local development and Edge deployment.
+#
+# TODO: Add healthchecks for all services.
+# TODO: Add resource limits for Edge hardware (memory, CPU).
+# TODO: Add logging driver configuration (json-file, max-size).
+# TODO: Profile for Jetson (arm64) vs Raspberry Pi (arm32).
+
+services:
+  # AI Python — Inference engine
+  ai-python:
+    build:
+      context: ./ai-python
+      dockerfile: Dockerfile
+    container_name: condor-eye-ai
+    restart: unless-stopped
+    # TODO: Mount models volume for .pt / .onnx files.
+    # TODO: Expose gRPC/HTTP endpoint for Gateway integration.
+    environment:
+      - RUST_LOG=info
+    networks:
+      - condor-net
+    # TODO: Uncomment after Dockerfile is created.
+    # profiles:
+    #   - all
+    #   - ai
+
+  # Communications Rust — Gateway server
+  gateway:
+    build:
+      context: ./comms-rust
+      dockerfile: Dockerfile
+    container_name: condor-eye-gateway
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - RUST_LOG=info
+      - BIND_ADDR=0.0.0.0:8080
+      # TODO: Add protocol config (MQTT_BROKER, NATS_URL, MAVLINK_PORT).
+    networks:
+      - condor-net
+    # TODO: Uncomment after Dockerfile is created.
+    # profiles:
+    #   - all
+    #   - comms
+
+  # PostgreSQL — Optional metadata store
+  # TODO: Uncomment when database is needed for alert persistence.
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: condor-eye-db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: condor
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #     POSTGRES_DB: condor_eye
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   networks:
+  #     - condor-net
+
+networks:
+  condor-net:
+    driver: bridge
+
+# TODO: Uncomment when postgres is enabled.
+# volumes:
+#   pgdata:
